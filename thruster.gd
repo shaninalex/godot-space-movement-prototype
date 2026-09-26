@@ -1,5 +1,5 @@
 class_name Thruster
-extends Node3D
+extends ShipModule
 
 @export var throttle: float = 1.0
 @export var max_thrust: float = 100.0

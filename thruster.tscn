@@ -17,6 +17,7 @@ height = 0.9906616
 [node name="Thruster" type="Node3D" unique_id=1526727572 node_paths=PackedStringArray("effect")]
 script = ExtResource("1_bda3k")
 effect = NodePath("Effect")
+mass = 1.0
 
 [node name="Body" parent="." unique_id=66710840 instance=ExtResource("1_hnbbr")]
 

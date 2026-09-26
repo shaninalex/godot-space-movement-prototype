@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://crtfvxvlhu6fk" path="res://player.gd" id="1_xhfnw"]
 [ext_resource type="PackedScene" uid="uid://by1r2cet45gnw" path="res://thruster.tscn" id="2_kpjcp"]
-[ext_resource type="Script" path="res://camera_rig.gd" id="3_camera_rig"]
+[ext_resource type="Script" uid="uid://dpy2huey4c5fa" path="res://camera_rig.gd" id="3_camera_rig"]
+[ext_resource type="PackedScene" uid="uid://cjh73rjcp87mh" path="res://cargo.tscn" id="4_e80uo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lgns8"]
 size = Vector3(2.4765625, 2.1188965, 5.4902344)
@@ -99,3 +100,6 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.1
 
 [node name="Thruster24" parent="." unique_id=2125660772 instance=ExtResource("2_kpjcp")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.1668496, -0.9873471, -2.7496257)
+
+[node name="Cargo" parent="." unique_id=1264340302 instance=ExtResource("4_e80uo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02346611, 1.2867029, 2.189375)
