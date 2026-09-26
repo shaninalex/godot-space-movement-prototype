@@ -37,7 +37,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func update_mass_and_center_of_mass() -> void:
 	var total_mass: float = ship_base_mass
-	var weighted_pos := Vector3.ZERO # Власний центр мас корпусу в (0,0,0)
+	var weighted_pos := Vector3.ZERO
 
 	for child in get_children():
 		if child is ShipModule:
