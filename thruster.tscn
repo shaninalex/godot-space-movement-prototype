@@ -10,8 +10,8 @@ emission_enabled = true
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_lgns8"]
 material = SubResource("StandardMaterial3D_kne1u")
-top_radius = 0.2
-bottom_radius = 0.0
+top_radius = 0.101
+bottom_radius = 0.001
 height = 0.9906616
 
 [node name="Thruster" type="Node3D" unique_id=1526727572 node_paths=PackedStringArray("effect")]

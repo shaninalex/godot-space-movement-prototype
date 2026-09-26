@@ -1,12 +1,17 @@
 class_name Player
 extends RigidBody3D
 
+const CursorControllerClass = preload("res://cursor_controller.gd")
+
 @export var ship_base_mass: float = 100.0
 @onready var movement_controller: MovementController = MovementController.new()
+@onready var cursor_controller: CanvasLayer = CursorControllerClass.new()
 
 
 func _ready():
 	angular_damp = 0.3
+	add_child(cursor_controller)
+	movement_controller.mouse_steering_updated.connect(cursor_controller.update_steering)
 	init_thrusters()
 	init_modules()
 	update_mass_and_center_of_mass()

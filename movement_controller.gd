@@ -1,6 +1,8 @@
 class_name MovementController
 extends Node
 
+signal mouse_steering_updated(is_steering: bool, offset: Vector2)
+
 var _thrusters: Array[Thruster] = []
 var _center_of_mass: Vector3 = Vector3.ZERO
 
@@ -91,6 +93,9 @@ func get_desired_rotation(body: RigidBody3D = null) -> Vector3:
 		if camera_rig and "is_orbit_mode" in camera_rig:
 			is_orbiting = camera_rig.is_orbit_mode
 
+	var is_steering := false
+	var steering_offset := Vector2.ZERO
+
 	# Mouse offset from screen center: further from center = stronger continuous rotation
 	if not is_orbiting and body and body.get_viewport():
 		var viewport_rect := body.get_viewport().get_visible_rect()
@@ -101,6 +106,10 @@ func get_desired_rotation(body: RigidBody3D = null) -> Vector3:
 			if offset.length() > mouse_deadzone:
 				pitch = clampf(-offset.y, -1.0, 1.0)
 				yaw = clampf(-offset.x, -1.0, 1.0)
+				is_steering = true
+				steering_offset = offset
+
+	mouse_steering_updated.emit(is_steering, steering_offset)
 
 	return Vector3(pitch, yaw, roll)
 

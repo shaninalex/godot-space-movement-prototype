@@ -20,6 +20,8 @@ func ignite(level: float = 1.0) -> Transform3D:
 
 	if effect:
 		effect.visible = true
+		effect.scale.y = actual_level
+		effect.position.y = 0.15 + (0.5 * actual_level)
 
 	var current_thrust := max_thrust * actual_level
 	# Returns transform with thruster local position and thrust-scaled basis
