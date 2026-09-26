@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://ckudr8chj1kgo"]
+
+[ext_resource type="Script" uid="uid://crtfvxvlhu6fk" path="res://player.gd" id="1_xhfnw"]
+[ext_resource type="PackedScene" uid="uid://by1r2cet45gnw" path="res://thruster.tscn" id="2_kpjcp"]
+[ext_resource type="Script" path="res://camera_rig.gd" id="3_camera_rig"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lgns8"]
+size = Vector3(2.4765625, 2.1188965, 5.4902344)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lgns8"]
+size = Vector3(2.4958496, 2.1503906, 5.486328)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vho56"]
+
+[node name="Player" type="RigidBody3D" unique_id=2135281871]
+script = ExtResource("1_xhfnw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=84800400]
+shape = SubResource("BoxShape3D_lgns8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=444175754]
+mesh = SubResource("BoxMesh_lgns8")
+surface_material_override/0 = SubResource("StandardMaterial3D_vho56")
+
+[node name="CameraRig" type="Node3D" parent="." unique_id=1492913099]
+script = ExtResource("3_camera_rig")
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=192994442]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9956393, 16.133942)
+
+[node name="Thruster" parent="." unique_id=1526727572 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1611046, 1.0734593, -2.4096446)
+
+[node name="Thruster2" parent="." unique_id=64982264 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1611046, 1.0734593, 2.4238148)
+
+[node name="Thruster3" parent="." unique_id=959163284 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.2480217, -0.99730444, -2.4096446)
+
+[node name="Thruster4" parent="." unique_id=1764740492 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.2480217, -0.99730444, 2.4238148)
+
+[node name="Thruster5" parent="." unique_id=777629984 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(1.3113416e-07, -1, 0, 1, 1.3113416e-07, 0, 0, 0, 1, -1.2487283, 0.98141634, -2.4096446)
+
+[node name="Thruster6" parent="." unique_id=1666173402 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(1.3113416e-07, -1, 0, 1, 1.3113416e-07, 0, 0, 0, 1, -1.2487283, 0.98141634, 2.4238148)
+
+[node name="Thruster7" parent="." unique_id=1111944971 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(-1, -8.742277e-08, 0, 8.742277e-08, -1, 0, 0, 0, 1, -1.162132, -1.0791279, -2.4096446)
+
+[node name="Thruster8" parent="." unique_id=377241403 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(-1, -8.742277e-08, 0, 8.742277e-08, -1, 0, 0, 0, 1, -1.1652545, -1.0791279, 2.4238148)
+
+[node name="Thruster9" parent="." unique_id=645486448 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.1643836, 0.9872839, -2.7496257)
+
+[node name="Thruster10" parent="." unique_id=1070854984 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 1.164798, 0.98725903, 2.743968)
+
+[node name="Thruster11" parent="." unique_id=563640685 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1668025, 1.0734593, -2.4096446)
+
+[node name="Thruster12" parent="." unique_id=420310697 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1668025, 1.0734593, 2.4238148)
+
+[node name="Thruster13" parent="." unique_id=63987583 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.2480217, 0.9897301, -2.4096446)
+
+[node name="Thruster14" parent="." unique_id=52459705 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.2480217, 0.9897301, 2.4238148)
+
+[node name="Thruster15" parent="." unique_id=863203099 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(-1, -8.742277e-08, 0, 8.742277e-08, -1, 0, 0, 0, 1, 1.1647413, -1.0791279, -2.4096446)
+
+[node name="Thruster16" parent="." unique_id=2107879460 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(-1, -8.742277e-08, 0, 8.742277e-08, -1, 0, 0, 0, 1, 1.1647413, -1.0791279, 2.4238148)
+
+[node name="Thruster17" parent="." unique_id=273048209 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(1.3113416e-07, -1, 0, 1, 1.3113416e-07, 0, 0, 0, 1, -1.2487283, -0.9806768, -2.4096446)
+
+[node name="Thruster18" parent="." unique_id=260193281 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(1.3113416e-07, -1, 0, 1, 1.3113416e-07, 0, 0, 0, 1, -1.2487283, -0.9806768, 2.4238148)
+
+[node name="Thruster19" parent="." unique_id=619022506 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 1.164798, -0.9900707, 2.743968)
+
+[node name="Thruster20" parent="." unique_id=2120536614 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -1.163111, 0.98725903, 2.743968)
+
+[node name="Thruster21" parent="." unique_id=2078050332 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -1.163111, -0.98562497, 2.743968)
+
+[node name="Thruster22" parent="." unique_id=1739991840 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.1643836, -0.9873471, -2.7496257)
+
+[node name="Thruster23" parent="." unique_id=177643098 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.1668496, 0.9872839, -2.7496257)
+
+[node name="Thruster24" parent="." unique_id=2125660772 instance=ExtResource("2_kpjcp")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.1668496, -0.9873471, -2.7496257)
