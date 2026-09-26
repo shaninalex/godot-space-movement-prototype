@@ -2,4 +2,6 @@
 
 This is example of physics based movement.
 
-[https://www.youtube.com/watch?v=PFaVTPAPjIU](https://www.youtube.com/watch?v=PFaVTPAPjIU)
+Video: 
+
+[![Video Title](https://img.youtube.com/vi/PFaVTPAPjIU/0.jpg)](https://www.youtube.com/watch?v=PFaVTPAPjIU)
