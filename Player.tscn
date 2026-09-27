@@ -25,6 +25,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vho56")
 
 [node name="CameraRig" type="Node3D" parent="." unique_id=1492913099]
 script = ExtResource("3_camera_rig")
+pan_smooth_speed = 1.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=192994442]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9956393, 16.133942)

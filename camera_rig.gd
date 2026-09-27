@@ -13,6 +13,13 @@ extends Node3D
 @export var zoom_step: float = 0.15
 @export var zoom_speed: float = 12.0
 
+@export_group("Pan Offset")
+## Maximum lateral (X) and vertical (Y) camera shift based on mouse steering.
+@export var max_pan_offset: Vector2 = Vector2(5.5, 1.5)
+## Speed of camera pan smoothing.
+@export var pan_smooth_speed: float = 0.05
+@export var pan_enabled: bool = true
+
 @export_group("Orbit Mode")
 @export var orbit_sensitivity: float = 0.005
 @export var orbit_inertia_speed: float = 10.0
@@ -29,6 +36,7 @@ var _orbit_quat_target: Quaternion = Quaternion.IDENTITY
 var _orbit_quat: Quaternion = Quaternion.IDENTITY
 
 var _current_rotation_quat: Quaternion = Quaternion.IDENTITY
+var _current_pan: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
@@ -79,6 +87,18 @@ func _physics_process(delta: float) -> void:
 	# Process Zoom
 	_current_zoom = lerpf(_current_zoom, _target_zoom, zoom_speed * delta)
 
+	# Process Pan-Offset based on mouse cursor distance from screen center
+	var target_pan := Vector2.ZERO
+	if not is_orbit_mode and get_viewport() and pan_enabled:
+		var viewport_rect := get_viewport().get_visible_rect()
+		var center := viewport_rect.size * 0.5
+		if center.x > 0.0 and center.y > 0.0:
+			var mouse_pos := get_viewport().get_mouse_position()
+			var offset := (mouse_pos - center) / center
+			target_pan = Vector2(offset.x * max_pan_offset.x, offset.y * max_pan_offset.y)
+
+	_current_pan = _current_pan.lerp(target_pan, pan_smooth_speed * delta)
+
 	# Process Rotation
 	var ship_quat := _target_node.global_basis.get_rotation_quaternion()
 
@@ -95,10 +115,10 @@ func _physics_process(delta: float) -> void:
 
 	global_basis = Basis(_current_rotation_quat)
 
-	# Update camera position and frame the ship
+	# Update camera position with zoom and pan offset, and frame the ship
 	if camera:
 		camera.position = base_offset * _current_zoom
-		camera.look_at(global_position, global_basis.y)
+		camera.look_at(Vector3(global_position.x + _current_pan.x, global_position.y + _current_pan.y, global_position.z), global_basis.y)
 
 
 func toggle_orbit_mode() -> void:
