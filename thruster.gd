@@ -5,7 +5,7 @@ extends ShipModule
 @export var max_thrust: float = 100.0
 @export var consumption: float = 0.05
 @export var effect: Node3D
-
+@export var enable: bool = true
 
 func _ready() -> void:
 	if effect:
@@ -13,6 +13,9 @@ func _ready() -> void:
 
 
 func ignite(level: float = 1.0) -> Transform3D:
+	if not enable:
+		return Transform3D.IDENTITY
+		
 	var actual_level := clampf(level, 0.0, 1.0) * clampf(throttle, 0.0, 1.0)
 	if actual_level <= 0.0:
 		off()

@@ -6,7 +6,7 @@ signal mouse_steering_updated(is_steering: bool, offset: Vector2)
 var _thrusters: Array[Thruster] = []
 var _center_of_mass: Vector3 = Vector3.ZERO
 
-var mouse_deadzone: float = 0.3
+var mouse_deadzone: float = 0.7
 
 
 func add_thruster(thruster: Thruster) -> void:

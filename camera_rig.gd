@@ -6,6 +6,9 @@ extends Node3D
 @export var rotation_inertia_speed: float = 6.0
 ## Base offset of camera relative to ship (Y = height, Z = distance behind).
 @export var base_offset: Vector3 = Vector3(0.0, 5.0, 16.0)
+## Point the camera looks at, relative to the ship (rig-local space).
+## Positive Y / negative Z moves the focus above / ahead of the ship, pushing the ship lower on screen.
+@export var focus_offset: Vector3 = Vector3(0.0, 5.0, 0.0)
 
 @export_group("Zoom")
 @export var min_zoom: float = 0.4
@@ -15,7 +18,7 @@ extends Node3D
 
 @export_group("Pan Offset")
 ## Maximum lateral (X) and vertical (Y) camera shift based on mouse steering.
-@export var max_pan_offset: Vector2 = Vector2(5.5, 1.5)
+@export var max_pan_offset: Vector2 = Vector2(3.5, 1.5)
 ## Speed of camera pan smoothing.
 @export var pan_smooth_speed: float = 0.05
 @export var pan_enabled: bool = true
@@ -23,6 +26,8 @@ extends Node3D
 @export_group("Orbit Mode")
 @export var orbit_sensitivity: float = 0.005
 @export var orbit_inertia_speed: float = 10.0
+## Speed of blending focus_offset to the ship center when entering orbit mode (and back when leaving).
+@export var focus_blend_speed: float = 4.0
 
 @onready var camera: Camera3D = $Camera3D
 
@@ -37,22 +42,25 @@ var _orbit_quat: Quaternion = Quaternion.IDENTITY
 
 var _current_rotation_quat: Quaternion = Quaternion.IDENTITY
 var _current_pan: Vector2 = Vector2.ZERO
+var _current_focus: Vector3 = Vector3.ZERO
 
 
 func _ready() -> void:
 	_target_node = get_parent() as Node3D
 	top_level = true
 
-	if _target_node:
-		global_position = _target_node.global_position
-		_current_rotation_quat = _target_node.global_basis.get_rotation_quaternion()
-		global_basis = Basis(_current_rotation_quat)
+	assert(_target_node, "no target node")
+	assert(camera, "no target node")
 
-	if camera:
-		if base_offset == Vector3.ZERO:
-			base_offset = camera.position
-		camera.position = base_offset
-		camera.look_at(global_position, Vector3.UP)
+	global_position = _target_node.global_position
+	_current_rotation_quat = _target_node.global_basis.get_rotation_quaternion()
+	global_basis = Basis(_current_rotation_quat)
+
+	if base_offset == Vector3.ZERO:
+		base_offset = camera.position
+	camera.position = base_offset
+	_current_focus = focus_offset
+	camera.look_at(to_global(_current_focus), global_basis.y)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -116,9 +124,15 @@ func _physics_process(delta: float) -> void:
 	global_basis = Basis(_current_rotation_quat)
 
 	# Update camera position with zoom and pan offset, and frame the ship
-	if camera:
-		camera.position = base_offset * _current_zoom
-		camera.look_at(Vector3(global_position.x + _current_pan.x, global_position.y + _current_pan.y, global_position.z), global_basis.y)
+	camera.position = base_offset * _current_zoom
+
+	# In orbit mode focus smoothly returns to the ship center, otherwise to focus_offset
+	var target_focus := Vector3.ZERO if is_orbit_mode else focus_offset
+	_current_focus = _current_focus.lerp(target_focus, focus_blend_speed * delta)
+
+	# Focus point is defined in rig-local space, so it rotates together with the ship
+	var local_focus := _current_focus + Vector3(_current_pan.x, _current_pan.y, 0.0)
+	camera.look_at(to_global(local_focus), global_basis.y)
 
 
 func toggle_orbit_mode() -> void:

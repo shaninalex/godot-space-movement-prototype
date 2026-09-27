@@ -25,6 +25,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vho56")
 
 [node name="CameraRig" type="Node3D" parent="." unique_id=1492913099]
 script = ExtResource("3_camera_rig")
+rotation_inertia_speed = 10.0
 pan_smooth_speed = 1.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=192994442]
@@ -103,4 +104,13 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.1
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.1668496, -0.9873471, -2.7496257)
 
 [node name="Cargo" parent="." unique_id=1264340302 instance=ExtResource("4_e80uo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02346611, 1.2867029, 2.189375)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61743045, -0.59253776, 3.1799393)
+
+[node name="Cargo2" parent="." unique_id=43229947 instance=ExtResource("4_e80uo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5973697, 0.58079684, 3.2491405)
+
+[node name="Cargo3" parent="." unique_id=1170941768 instance=ExtResource("4_e80uo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65864015, -0.6005839, 3.2667236)
+
+[node name="Cargo4" parent="." unique_id=1008528168 instance=ExtResource("4_e80uo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.67297935, 0.577139, 3.04181)
